@@ -27,10 +27,10 @@ function indexMethod(index: number) {
 }
 
 // 切换分页
-function sizeChange(pageSize: number) {
+function pageSizeChange(pageSize: number) {
   console.log(pageSize);
 }
-function currentChange(pageIndex: number) {
+function currentPageChange(pageIndex: number) {
   console.log(pageIndex);
 }
 </script>
@@ -42,8 +42,8 @@ function currentChange(pageIndex: number) {
       :columns="columns"
       :tableConfig="tableConfig"
       @indexMethod="indexMethod"
-      @sizeChange="sizeChange"
-      @currentChange="currentChange"
+      @page-size-change="pageSizeChange"
+      @current-page-change="currentPageChange"
       stripe
       border
       showSeletion

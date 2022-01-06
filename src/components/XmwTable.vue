@@ -53,8 +53,8 @@
     <div class="pagination">
       <el-pagination
         v-if="showPagination"
-        @size-change="sizeChange"
-        @current-change="currentChange"
+        @size-change="pageSizeChange"
+        @current-change="currentPageChange"
         :total="_paginationConfig.total"
         :current-page="_paginationConfig.current"
         :page-size="_paginationConfig.pageSize"
@@ -101,7 +101,11 @@ const prop = defineProps({
     default: () => {},
   },
 });
-const emit = defineEmits(["sizeChange", "currentChange", "indexMethod"]); // 声明emit
+const emit = defineEmits([
+  "pageSizeChange",
+  "currentPageChange",
+  "indexMethod",
+]); // 声明emit
 
 // 合并表格配置项
 const _tableConfig = computed(() => {
@@ -134,11 +138,11 @@ const _paginationConfig = computed(() => {
 });
 
 // 切换分页
-function sizeChange(pageSize: number) {
-  emit("sizeChange", pageSize);
+function pageSizeChange(pageSize: number) {
+  emit("pageSizeChange", pageSize);
 }
-function currentChange(pageIndex: number) {
-  emit("currentChange", pageIndex);
+function currentPageChange(pageIndex: number) {
+  emit("currentPageChange", pageIndex);
 }
 </script>
 <style scoped>
