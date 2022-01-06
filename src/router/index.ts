@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import HelloWorld from '@/layout/Index.vue'
+import XmwTable from '@/components/XmwTable.vue'
 
 const routes:Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'home',
-        component: HelloWorld
+        component: XmwTable
     }
 ]
 //创建
