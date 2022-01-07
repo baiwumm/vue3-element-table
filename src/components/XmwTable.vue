@@ -1,10 +1,27 @@
 <template>
   <div class="common-table" v-loading="loading">
+    <!--批量操作栏，勾选行时显示-->
+    <el-row
+      justify="space-between"
+      style="align-items: center; margin: 10px 0"
+      v-if="_tableConfig.showSeletion && state.selection.length"
+    >
+      <div class="multi-menu">
+        <span style="font-size: 12px"
+          >已选中{{ state.selection.length }}项</span
+        >
+        <el-divider direction="vertical" />
+        <slot name="multiSelectMenu" :selection="state.selection" />
+      </div>
+      <a class="close" @click="clearSelection"></a>
+    </el-row>
+    <!-- 数据表格 -->
     <el-table
-      ref="commonTable"
+      ref="commonTableRef"
       :data="tableData"
       v-bind="$attrs"
-      :rowKey="_tableConfig.rowkey"
+      :rowKey="_tableConfig.rowKey"
+      @selection-change="selectionChange"
     >
       <!-- 多选 -->
       <el-table-column
@@ -19,8 +36,13 @@
       <el-table-column
         v-if="_tableConfig.showIndexColumn"
         type="index"
-        width="50"
-      />
+        :index="typeIndex"
+        width="60"
+      >
+        <template v-slot:header>
+          <span>序号</span>
+        </template>
+      </el-table-column>
       <!-- 递归渲染多级表头 -->
       <template v-for="column in columns">
         <multistage-column
@@ -35,7 +57,7 @@
           show-overflow-tooltip
         >
           <template v-if="column.slotName" v-slot="scope">
-            <slot :name="column.slotName" :data="scope"></slot>
+            <slot :name="column.slotName" :scope="scope"></slot>
           </template>
         </el-table-column>
       </template>
@@ -66,7 +88,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { defineProps, computed, defineEmits } from "vue";
+import { defineProps, computed, defineEmits, reactive, ref } from "vue";
 import MultistageColumn from "./MultistageColumn.vue";
 // 定义组件接收的prop属性
 const prop = defineProps({
@@ -104,12 +126,17 @@ const prop = defineProps({
 const emit = defineEmits([
   "pageSizeChange",
   "currentPageChange",
-  "indexMethod",
+  "multiSelection",
 ]); // 声明emit
+
+const state = reactive({
+  selection: [],
+});
+const commonTableRef = ref<HTMLElement | null>(null); // 表格ref
 
 // 合并表格配置项
 const _tableConfig = computed(() => {
-  let result = {};
+  let result: any = {};
   const _tableConfig = { label: "操作", minWidth: 80, fixed: "right" };
   prop.tableConfig.handlerConfig &&
     Object.assign(_tableConfig, prop.tableConfig.handlerConfig);
@@ -144,10 +171,53 @@ function pageSizeChange(pageSize: number) {
 function currentPageChange(pageIndex: number) {
   emit("currentPageChange", pageIndex);
 }
+
+// 清空多选项
+function clearSelection() {
+  state.selection = [];
+  commonTableRef.value.clearSelection();
+}
+
+// 多选赋值
+function selectionChange(selection: any) {
+  state.selection = selection;
+  // 暴露选中事件
+  emit("multiSelection", selection);
+}
+
+// 自定义排序
+function typeIndex(index: number) {
+  const tabIndex =
+    index +
+    (_paginationConfig.value.current - 1) * _paginationConfig.value.pageSize +
+    1;
+  return tabIndex;
+}
 </script>
 <style scoped>
 .pagination {
   text-align: right;
   margin: 10px 0;
+}
+.close {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+.close:before,
+.close:after {
+  position: absolute;
+  left: 8px;
+  content: " ";
+  height: 16px;
+  width: 2px;
+  background-color: #333;
+  cursor: pointer;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
 }
 </style>

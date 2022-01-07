@@ -3,17 +3,30 @@ export const tableData = [
     {
         id: '1',
         name: '李白',
-        address: '唐朝',
-        province: '广西',
-        area: '龙华',
-        county: '华强北'
+        province: '广东',
+        area: '深圳',
+        county: '南山'
     },
     {
         id: '2',
         name: '曹操',
+        province: '北京',
+        area: '朝阳',
+        county: '天安门'
+    },
+    {
+        id: '3',
+        name: '白居易',
         province: '广东',
-        area: '南山',
-        county: '华强北'
+        area: '广州',
+        county: '天河'
+    },
+    {
+        id: '4',
+        name: '秦始皇',
+        province: '秦国',
+        area: '江南',
+        county: '东篱下'
     }
 ]
 
@@ -30,7 +43,8 @@ export const columns = [
     },
     {
         prop: 'name',
-        label: '名字'
+        label: '名字',
+        slotName: 'name'
     },
     {
         prop: 'address',

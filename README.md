@@ -29,7 +29,7 @@
 | :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------: | :------------------------------------------: |
 | showSeletion | 是否支持多选                                                                                                                                                                             |       Boolean        |                    false                     |
 | showHandler       | 是否显示操作列                                                                                                                                                                           |       Boolean        |                    false                     |
-| handlerConfig     | 操作列配置，showHandler 为 true 时有效                                                                                                                                                   |        Objext        | { label: "操作", minWidth: 80, fixed: "right" } |
+| handlerConfig     | 操作列配置，showHandler 为 true 时有效                                                                                                                                                   |        Object        | { label: "操作", minWidth: 80, fixed: "right" } |
 | showIndexColumn   | 是否显示序号列                                                                                                                                                                           |       Boolean        |                    false                     |
 | rowKey            | 行数据的 Key，用来优化 Table 的渲染；在使用 多选 功能与显示树形数据时，该属性是必填的。类型为 String 时，支持多层访问：user.info.id，但不支持 user.info[0].id，此种情况请使用 Function。 | Function(row)/String |                      --                      |
 
@@ -50,11 +50,8 @@
 
 | name                     | 说明                                                                 |           参数           |
 | :----------------------- | :------------------------------------------------------------------- | :----------------------: |
-| 列的 prop 值             | 自定义列的内容,当列的 slot 属性设置为 true 时有效                    | { row, column, \$index } |
-| 列的 prop 值 + '-header' | 自定义表头的内容,当列的 slot 属性设置为 true 时有效                  |   { column, \$index }    |
+| multiSelectMenu                  | 多选显示顶部操作栏                                                   | { row, column, \$index } |
 | handler                  | 自定义操作栏的内容                                                   | { row, column, \$index } |
-| multiSelectMenu          | 自定义多选操作列内容，enableMultiSelect 为 true 时有效，勾选行时显示 |      { selection }       |
-| topMenu                  | 自定义顶部操作，勾选行时不显示                                       |            -             |
 
 ### Events
 
