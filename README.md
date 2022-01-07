@@ -1,6 +1,6 @@
 # vue3-element-table
 
-基于 Vue3 + Element-plus 封装的 table 组件，支持所有 elementUI table 组件配置项 [文档](hhttps://element-plus.gitee.io/zh-CN/component/table.html)，另外多选功能做了跨分页多选
+基于 Vue3 + Element-plus 封装的 table 组件，支持所有 elementUI table 组件配置项 [文档](https://element-plus.gitee.io/zh-CN/component/table.html)，另外多选功能做了跨分页多选
 
 ### Attributes
 
@@ -53,9 +53,6 @@
 | multiSelectMenu                  | 多选显示顶部操作栏                                                   | { row, column, \$index } |
 | handler                  | 自定义操作栏的内容                                                   | { row, column, \$index } |
 
-### Events
-
-除此之外支持所有 el-table events
 
 注： 因为添加了跨分页多选的功能，selection-change会在切换分页设置勾选状态时调用多次
 
@@ -63,7 +60,3 @@
 | :------------------ | :----------------------- | :------: |
 | current-page-change | currentPage 改变时会触发 |  当前页  |
 | page-size-change    | pageSize 改变时会触发    | 每页条数 |
-
-### Methods
-
-支持所有 el-table 的 methods
