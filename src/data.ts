@@ -1,4 +1,12 @@
-
+import type { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults'
+interface columnTypes {
+    id: string,
+    name: string,
+    province: string,
+    area: string,
+    county: string,
+    amount: Number
+}
 // 表格列配置
 export const columns: any = [
     // 自定义索引
@@ -14,6 +22,16 @@ export const columns: any = [
     {
         prop: 'name',
         label: '名字',
+        filters: [
+            { text: '李白2', value: '李白2' },
+            { text: '李白4', value: '李白4' }
+        ],
+        'filter-method': (value: string,
+            row: columnTypes,
+            column: TableColumnCtx<columnTypes>) => {
+            const property = column['property']
+            return row[property] === value
+        },
         slotName: 'name'
     },
     {
@@ -43,5 +61,10 @@ export const columns: any = [
                 ]
             }
         ]
-    }
+    },
+    {
+        prop: 'amount',
+        label: '金额',
+        sortable: true
+    },
 ]

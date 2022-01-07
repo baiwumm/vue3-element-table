@@ -68,6 +68,7 @@ function fetchData() {
       province: "广东",
       area: "深圳",
       county: "南山",
+      amount: i * 100
     });
   }
   return result;
@@ -97,7 +98,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container" style="width: 800px; margin: 50px auto">
+  <div class="container" style="width: 1200px; margin: 50px auto">
     <XmwTable
       :tableData="state.data"
       :loading="state.loading"
@@ -111,26 +112,19 @@ onMounted(() => {
       stripe
       border
       showSeletion
-      height="500"
+      max-height="500"
+      show-summary
     >
       <template v-slot:multiSelectMenu="{ selection }">
-        <el-button type="text" size="small" @click="batchDelete(selection)"
-          >批量删除</el-button
-        >
-        <el-button type="text" size="small" @click="batchExport(selection)"
-          >批量导出</el-button
-        >
+        <el-button type="text" size="small" @click="batchDelete(selection)">批量删除</el-button>
+        <el-button type="text" size="small" @click="batchExport(selection)">批量导出</el-button>
       </template>
       <template v-slot:name="{ scope }">
         <el-tag type="success">{{ scope.row.name }}</el-tag>
       </template>
       <template v-slot:handler="{ scope }">
-        <el-button type="text" size="small" @click="handlerEdit(scope)"
-          >编辑</el-button
-        >
-        <el-button type="text" size="small" @click="handlerDelect(scope)"
-          >删除</el-button
-        >
+        <el-button type="text" size="small" @click="handlerEdit(scope)">编辑</el-button>
+        <el-button type="text" size="small" @click="handlerDelect(scope)">删除</el-button>
       </template>
     </XmwTable>
   </div>
