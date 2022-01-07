@@ -1,6 +1,6 @@
 # vue3-element-table
 
-基于 Vue3 + Element-plus 封装的 table 组件，支持所有 elementUI table 组件配置项 [文档](hhttps://element-plus.gitee.io/zh-CN/component/table.html)，另外多选功能做了跨分页多选
+基于 Vue3 + Element-plus 封装的 table 组件，支持所有 elementUI table 组件配置项 [文档](https://element-plus.gitee.io/zh-CN/component/table.html)，另外多选功能做了跨分页多选
 
 ### Attributes
 
