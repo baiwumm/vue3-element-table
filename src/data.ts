@@ -1,40 +1,10 @@
-// 表格模拟数据
-export const tableData = [
-    {
-        id: '1',
-        name: '李白',
-        province: '广东',
-        area: '深圳',
-        county: '南山'
-    },
-    {
-        id: '2',
-        name: '曹操',
-        province: '北京',
-        area: '朝阳',
-        county: '天安门'
-    },
-    {
-        id: '3',
-        name: '白居易',
-        province: '广东',
-        area: '广州',
-        county: '天河'
-    },
-    {
-        id: '4',
-        name: '秦始皇',
-        province: '秦国',
-        area: '江南',
-        county: '东篱下'
-    }
-]
 
 // 表格列配置
-export const columns = [
+export const columns: any = [
     // 自定义索引
     {
         label: '排名',
+        prop: 'ranking',
         type: 'index',
         width: 80,
         index: (index: number) => {

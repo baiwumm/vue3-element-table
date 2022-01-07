@@ -7,9 +7,7 @@
       v-if="_tableConfig.showSeletion && state.selection.length"
     >
       <div class="multi-menu">
-        <span style="font-size: 12px"
-          >已选中{{ state.selection.length }}项</span
-        >
+        <span style="font-size: 12px">已选中{{ state.selection.length }}项</span>
         <el-divider direction="vertical" />
         <slot name="multiSelectMenu" :selection="state.selection" />
       </div>
@@ -30,8 +28,7 @@
         width="60"
         :reserve-selection="_tableConfig.isCheckMemory"
         align="center"
-      >
-      </el-table-column>
+      ></el-table-column>
       <!-- 显示自定义索引 -->
       <el-table-column
         v-if="_tableConfig.showIndexColumn"
@@ -44,28 +41,20 @@
         </template>
       </el-table-column>
       <!-- 递归渲染多级表头 -->
-      <template v-for="column in columns">
+      <template v-for="column: any in columns">
         <multistage-column
           v-if="column.children && column.children.length"
           :key="column.prop"
           :column="column"
         ></multistage-column>
-        <el-table-column
-          v-else
-          :key="column.prop"
-          v-bind="column"
-          show-overflow-tooltip
-        >
+        <el-table-column v-else :key="column.id" v-bind="column" show-overflow-tooltip>
           <template v-if="column.slotName" v-slot="scope">
             <slot :name="column.slotName" :scope="scope"></slot>
           </template>
         </el-table-column>
       </template>
       <!-- 操作栏 -->
-      <el-table-column
-        v-if="_tableConfig.showHandler"
-        v-bind="_tableConfig.handlerConfig"
-      >
+      <el-table-column v-if="_tableConfig.showHandler" v-bind="_tableConfig.handlerConfig">
         <template v-slot="scope">
           <slot name="handler" :scope="scope"></slot>
         </template>
@@ -82,8 +71,7 @@
         :page-size="_paginationConfig.pageSize"
         :page-sizes="_paginationConfig.pageSizes"
         :layout="_paginationConfig.layout"
-      >
-      </el-pagination>
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -100,7 +88,7 @@ const prop = defineProps({
   //   表格配置项
   tableConfig: {
     type: Object,
-    default: () => {},
+    default: () => { },
   },
   //   表格列配置
   columns: {
@@ -120,7 +108,7 @@ const prop = defineProps({
   // 分页配置
   paginationConfig: {
     type: Object,
-    default: () => {},
+    default: () => { },
   },
 });
 const emit = defineEmits([
@@ -175,6 +163,7 @@ function currentPageChange(pageIndex: number) {
 // 清空多选项
 function clearSelection() {
   state.selection = [];
+  // @ts-ignore
   commonTableRef.value.clearSelection();
 }
 

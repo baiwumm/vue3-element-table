@@ -14,7 +14,7 @@ const tableConfig = reactive({
   },
 });
 
-const state = reactive({
+const state = reactive<any>({
   data: [],
   loading: false,
 });

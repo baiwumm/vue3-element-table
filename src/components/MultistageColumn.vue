@@ -8,12 +8,7 @@
         :key="item.prop"
         :column="item"
       ></multistage-column>
-      <el-table-column
-        v-else
-        :key="item.prop"
-        v-bind="item"
-        show-overflow-tooltip
-      >
+      <el-table-column v-else :key="item.id" v-bind="item" show-overflow-tooltip>
         <template v-if="item.slotName" v-slot="scope">
           <slot :name="item.slotName" :data="scope"></slot>
         </template>
