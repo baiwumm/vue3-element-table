@@ -30,6 +30,7 @@ export const columns: any = [
             row: columnTypes,
             column: TableColumnCtx<columnTypes>) => {
             const property = column['property']
+            // @ts-ignore
             return row[property] === value
         },
         slotName: 'name'
