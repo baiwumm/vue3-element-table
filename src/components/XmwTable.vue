@@ -1,5 +1,5 @@
 <template>
-  <div class="common-table" v-loading="loading">
+  <div class="common-table">
     <!--批量操作栏，勾选行时显示-->
     <el-row
       justify="space-between"
@@ -20,7 +20,14 @@
       v-bind="$attrs"
       :rowKey="_tableConfig.rowKey"
       @selection-change="selectionChange"
+      v-loading="loading"
     >
+      <!-- 是否是展开行 -->
+      <el-table-column type="expand" v-if="_tableConfig.showExpand">
+        <template #default="props">
+          <slot name="expand" :props="props" />
+        </template>
+      </el-table-column>
       <!-- 多选 -->
       <el-table-column
         v-if="_tableConfig.showSeletion"
@@ -38,7 +45,7 @@
       >
         <!-- 自定义序列号 -->
         <template v-slot:header>
-          <span>序号</span>
+          <span>{{ _tableConfig.indexLabel }}</span>
         </template>
       </el-table-column>
       <!-- 递归渲染多级表头 -->
@@ -60,25 +67,31 @@
           <slot name="handler" :scope="scope"></slot>
         </template>
       </el-table-column>
+      <!-- 自定义默认内容 -->
+      <el-table-column
+        type="append"
+        v-if="_tableConfig.showAppend"
+        :label="_tableConfig.appendLabel"
+      >
+        <template #default="props">
+          <slot name="append" :props="props" />
+        </template>
+      </el-table-column>
     </el-table>
     <!-- 分页配置 -->
-    <div class="pagination">
-      <el-pagination
-        v-if="showPagination"
+    <div class="pagination" v-if="showPagination">
+      <Pagination
+        :pageConfig="_paginationConfig"
         @size-change="pageSizeChange"
         @current-change="currentPageChange"
-        :total="_paginationConfig.total"
-        :current-page="_paginationConfig.current"
-        :page-size="_paginationConfig.pageSize"
-        :page-sizes="_paginationConfig.pageSizes"
-        :layout="_paginationConfig.layout"
-      ></el-pagination>
+      ></Pagination>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { defineProps, computed, defineEmits, reactive, ref } from "vue";
-import MultistageColumn from "./MultistageColumn.vue";
+import MultistageColumn from "./MultistageColumn.vue"; // 递归多级表头组件
+import Pagination from './Pagination.vue' // 分页组件
 // 定义组件接收的prop属性
 const prop = defineProps({
   // 表格源数据
@@ -133,8 +146,12 @@ const _tableConfig = computed(() => {
     rowKey: "id", //   行数据的 Key，用来优化 Table 的渲染
     showSeletion: false, // 是否多选
     showIndexColumn: false, // 是否显示自定义索引
+    indexLabel: '序号', // 自定义索引名
     isCheckMemory: false, // 是否需要跨页勾选
     showHandler: false, // 是否需要显示操作栏
+    showExpand: false, // 是否是展开行
+    showAppend: false, // 插入至表格最后一行之后的内容， 如果需要对表格的内容进行无限滚动操作，可能需要用到这个 slot。 若表格有合计行，该 slot 会位于合计行之上
+    appendLabel: '自定义', // 自定义默认内容
   };
   result = Object.assign(config, prop.tableConfig);
   result.handlerConfig = _tableConfig;
@@ -183,6 +200,67 @@ function typeIndex(index: number) {
     1;
   return tabIndex;
 }
+
+// 用于多选表格，切换某一行的选中状态， 如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中）
+function toggleRowSelection(row: any, selected: boolean) {
+  // @ts-ignore
+  commonTableRef.value.toggleRowSelection(row, selected);
+}
+
+// 用于多选表格，切换全选和全不选
+function toggleAllSelection() {
+  // @ts-ignore
+  commonTableRef.value.toggleAllSelection();
+}
+
+// 用于可扩展的表格或树表格，如果某行被扩展，则切换。 使用第二个参数，您可以直接设置该行应该被扩展或折叠。
+function toggleRowExpansion(row: any, expanded: boolean) {
+  // @ts-ignore
+  commonTableRef.value.toggleRowExpansion(row, expanded);
+}
+
+// 用于单选表格，设定某一行为选中行， 如果调用时不加参数，则会取消目前高亮行的选中状态。
+function setCurrentRow(row: any) {
+  // @ts-ignore
+  commonTableRef.value.setCurrentRow(row);
+}
+
+// 用于清空排序条件，数据会恢复成未排序的状态
+function clearSort() {
+  // @ts-ignore
+  commonTableRef.value.clearSort();
+}
+
+// 用于清空排序条件，数据会恢复成未排序的状态
+function clearFilter(columnKeys: Array<any>) {
+  // @ts-ignore
+  commonTableRef.value.clearFilter(columnKeys);
+}
+
+// 对 Table 进行重新布局。 当 Table 或其祖先元素由隐藏切换为显示时，可能需要调用此方法
+function doLayout() {
+  // @ts-ignore
+  commonTableRef.value.doLayout();
+}
+
+// 手动对 Table 进行排序。 参数 prop 属性指定排序列，order 指定排序顺序
+function sort(prop: string, order: string) {
+  // @ts-ignore
+  commonTableRef.value.sort(prop, order);
+}
+
+// 将table组件的全部方法暴露出去
+defineExpose({
+  clearSelection,
+  toggleRowSelection,
+  toggleAllSelection,
+  toggleRowExpansion,
+  setCurrentRow,
+  clearSort,
+  clearFilter,
+  doLayout,
+  sort
+})
 </script>
 <style scoped>
 .pagination {

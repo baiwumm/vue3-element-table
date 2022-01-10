@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { reactive, ref, onMounted } from "vue";
-import XmwTable from "@/components/XmwTable.vue";
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 import { columns } from "./data";
 
@@ -10,6 +9,8 @@ const tableConfig = reactive({
   showHandler: true,
   showIndexColumn: true,
   isCheckMemory: true,
+  showExpand: true,
+  showAppend: true,
   handlerConfig: {
     align: "center",
   },
@@ -24,7 +25,10 @@ const pageConfig = reactive({
   current: 1,
   pageSize: 10,
   total: 0,
+  small: true,
+  background: true
 });
+const xmwTableRef = ref<HTMLElement | null>(null); // 表格ref
 // 编辑操作
 function handlerEdit(row: any) {
   console.log(row);
@@ -58,6 +62,13 @@ function batchDelete(selection: any) {
 // 批量导出
 function batchExport(selection: any) {
   console.log(selection);
+}
+
+// 清除多选
+function clearSelection(selection: any) {
+  console.log(xmwTableRef.value)
+  // @ts-ignore
+  xmwTableRef.value.clearSelection()
 }
 
 // 模拟数据
@@ -106,7 +117,7 @@ function rowClick(row: any) {
 
 <template>
   <el-config-provider :locale="state.locale">
-    <div class="container" style="width: 1200px; margin: 50px auto">
+    <div class="container" style="width: 1200px; margin: 0 auto;padding-top:50px">
       <XmwTable
         :tableData="state.data"
         :loading="state.loading"
@@ -123,10 +134,18 @@ function rowClick(row: any) {
         max-height="500"
         show-summary
         @row-click="rowClick"
+        ref="xmwTableRef"
       >
+        <template v-slot:expand="{ props }">
+          <el-row style="padding:20px">
+            <el-col>姓名：{{ props.row.name }}</el-col>
+            <el-col>金额：{{ props.row.amount }}</el-col>
+          </el-row>
+        </template>
         <template v-slot:multiSelectMenu="{ selection }">
           <el-button type="text" size="small" @click="batchDelete(selection)">批量删除</el-button>
           <el-button type="text" size="small" @click="batchExport(selection)">批量导出</el-button>
+          <el-button type="text" size="small" @click="clearSelection(selection)">清除多选（测试表格方法绑定）</el-button>
         </template>
         <template v-slot:name="{ scope }">
           <el-tag type="success">{{ scope.row.name }}</el-tag>
@@ -134,6 +153,9 @@ function rowClick(row: any) {
         <template v-slot:handler="{ scope }">
           <el-button type="text" size="small" @click="handlerEdit(scope)">编辑</el-button>
           <el-button type="text" size="small" @click="handlerDelect(scope)">删除</el-button>
+        </template>
+        <template v-slot:append="{ props }">
+          <div>{{ props.row.name }}在笑</div>
         </template>
       </XmwTable>
     </div>

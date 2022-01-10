@@ -4,6 +4,8 @@
 
 ### Attributes
 
+除此之外支持所有 el-table attributes
+
 | 参数       | 说明                                                    |  类型   | 默认值 |
 | :--------- | :------------------------------------------------------ | :-----: | :----: |
 | tableData       | 表格数据                                                |  Array  |   -    |
@@ -27,11 +29,18 @@
 
 | 参数              | 说明                                                                                                                                                                                     |         类型         |                    默认值                    |
 | :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------: | :------------------------------------------: |
-| showSeletion | 是否支持多选                                                                                                                                                                             |       Boolean        |                    false                     |
-| showHandler       | 是否显示操作列                                                                                                                                                                           |       Boolean        |                    false                     |
-| handlerConfig     | 操作列配置，showHandler 为 true 时有效                                                                                                                                                   |        Object        | { label: "操作", minWidth: 80, fixed: "right" } |
-| showIndexColumn   | 是否显示序号列                                                                                                                                                                           |       Boolean        |                    false                     |
 | rowKey            | 行数据的 Key，用来优化 Table 的渲染；在使用 多选 功能与显示树形数据时，该属性是必填的。类型为 String 时，支持多层访问：user.info.id，但不支持 user.info[0].id，此种情况请使用 Function。 | Function(row)/String |                      --                      |
+| showSeletion | 是否支持多选                                                                                                                                                                             |       Boolean        |                    false                     |
+| showIndexColumn   | 是否显示序号列                                                                                                                                                                           |       Boolean        |                    false                     |
+| indexLabel   | 自定义索引名                                                                                                                                                                           |       String        |                    序号                     |
+| isCheckMemory   | 是否需要跨页勾选                                                                                                                                                                           |       Boolean        |                    false                     |
+| showHandler       | 是否显示操作列                                                                                                                                                                           |       Boolean        |                    false                     |
+| showExpand       | 是否是展开行                                                                                                                                                                           |       Boolean        |                    false                     |
+| showAppend       | 插入至表格最后一行之后的内容， 如果需要对表格的内容进行无限滚动操作，可能需要用到这个 slot。 若表格有合计行，该 slot 会位于合计行之上                                                                                                                                                                           |       Boolean        |                    false                     |
+| appendLabel   | 自定义默认内容                                                                                                                                                                           |       String        |                    自定义                     |
+| handlerConfig     | 操作列配置，showHandler 为 true 时有效                                                                                                                                                   |        Object        | { label: "操作", minWidth: 80, fixed: "right" } |
+
+
 
 
 ### paginationConfig Attributes
@@ -52,7 +61,12 @@
 | :----------------------- | :------------------------------------------------------------------- | :----------------------: |
 | multiSelectMenu                  | 多选显示顶部操作栏                                                   | { row, column, \$index } |
 | handler                  | 自定义操作栏的内容                                                   | { row, column, \$index } |
+| expand                  | 自定义展开行内容（必须先指定showExpand为true）                                                   | { row, column, \$index } |
+| append                  | 自定义默认内容（必须先指定showAppend为true）                                                   | { row, column, \$index } |
 
+### Events
+
+除此之外支持所有 el-table events
 
 注： 因为添加了跨分页多选的功能，selection-change会在切换分页设置勾选状态时调用多次
 
