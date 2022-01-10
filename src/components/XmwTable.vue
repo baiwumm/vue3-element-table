@@ -36,6 +36,7 @@
         :index="typeIndex"
         width="60"
       >
+        <!-- 自定义序列号 -->
         <template v-slot:header>
           <span>序号</span>
         </template>
