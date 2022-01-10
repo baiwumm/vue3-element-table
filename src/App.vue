@@ -106,9 +106,6 @@ function rowClick(row: any) {
 
 <template>
   <el-config-provider :locale="state.locale">
-    <img
-      src="https://hoss.service.hihonor.com/api/platform/v1/Tenant/30/MediaFiles/5dbccc09-582b-411b-a905-1b1ce00613a8NzMwYjQwNGRkMmM0NGE1MzAwZWVhYzMyOTMzZmMwY2EuanBn"
-    />
     <div class="container" style="width: 1200px; margin: 50px auto">
       <XmwTable
         :tableData="state.data"
