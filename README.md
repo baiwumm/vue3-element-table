@@ -1,12 +1,14 @@
-# vue3-element-table
+基于 `Vue3` + `Element-plus` 封装的 `Table` 组件，欢迎大家交流学习，持续开发中
+### 预览地址：https://cyan-xmw.github.io/vue3-element-table/dist/
+### 参考文章：https://juejin.cn/post/7016921470731288584
 
-- 😝 线上预览： https://cyan-xmw.github.io/vue3-element-table/dist/
+# Vue3-element-table
 
-基于 Vue3 + Element-plus 封装的 table 组件，支持所有 elementUI table 组件配置项 [文档](https://element-plus.gitee.io/zh-CN/component/table.html)，另外多选功能做了跨分页多选
+基于 `Vue3` + `Element-plus` 封装的 `table` 组件，支持所有 `elementUI table` 组件配置项 [文档](https://element-plus.gitee.io/zh-CN/component/table.html)，另外多选功能做了跨分页多选
 
-### Attributes
+### Table 属性
 
-除此之外支持所有 el-table attributes
+除此之外支持所有 `el-table` 属性
 
 | 参数       | 说明                                                    |  类型   | 默认值 |
 | :--------- | :------------------------------------------------------ | :-----: | :----: |
@@ -17,15 +19,15 @@
 | showPagination       | 是否显示分页 | Boolean  |  true  |
 | paginationConfig | 分页器配置项，详情见下方 paginationConfig 属性                | Object  |   -    |
 
-### Column Attributes 
+### Column 属性 
 
-除此之外支持所有 el-table-column attributes
+除此之外支持所有 `el-table-column` 属性
 
 | 参数 | 说明                         |  类型   | 默认值 |
 | :--- | :--------------------------- | :-----: | :----: |
 | slotName | 开启 slot 支持，用于自定义列 | Boolean | false  |
 
-### tableConfig Attributes
+### tableConfig 配置项
 
 除此之外支持所有 el-table attributes
 
@@ -45,9 +47,9 @@
 
 
 
-### paginationConfig Attributes
+### Page 配置项
 
-除此之外支持所有 el-pagination attributes
+除此之外支持所有 `el-pagination` 配置项
 
 | 参数            | 说明                   |  类型  | 默认值 |
 | :-------------- | :--------------------- | :----: | :----: |
@@ -57,7 +59,7 @@
 | pageSizes | 每页显示个数选择器的选项设置 | Array |   [10, 20, 30, 50]    |
 | layout | 组件布局，子组件名用逗号分隔 | String |   "total, sizes, prev, pager, next, jumper"    |
 
-### Slot
+### Slot 插槽
 
 | name                     | 说明                                                                 |           参数           |
 | :----------------------- | :------------------------------------------------------------------- | :----------------------: |
@@ -66,11 +68,11 @@
 | expand                  | 自定义展开行内容（必须先指定showExpand为true）                                                   | { row, column, \$index } |
 | append                  | 自定义默认内容（必须先指定showAppend为true）                                                   | { row, column, \$index } |
 
-### Events
+### Events 事件
 
-除此之外支持所有 el-table events
+除此之外支持所有 `el-table` 事件
 
-注： 因为添加了跨分页多选的功能，selection-change会在切换分页设置勾选状态时调用多次
+注： 因为添加了跨分页多选的功能，`selection-change` 会在切换分页设置勾选状态时调用多次
 
 | 事件名称            | 说明                     |   参数   |
 | :------------------ | :----------------------- | :------: |
