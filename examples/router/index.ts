@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router"
-import XmwTable from '@/components/XmwTable.vue'
+import XmwTable from '../../packages/xmwTable/src/main.vue'
 
-const routes:Array<RouteRecordRaw> = [
+const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'home',

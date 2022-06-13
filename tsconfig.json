@@ -9,15 +9,25 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/*":[
-        "src/*"
+      "@/*": [
+        "examples/*"
       ]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "examples/**/*.ts",
+    "examples/**/*.d.ts",
+    "examples/**/*.tsx",
+    "examples/**/*.vue"
+  ],
   // ts 排除的文件
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

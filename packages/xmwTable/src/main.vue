@@ -7,7 +7,9 @@
       v-if="_tableConfig.showSeletion && state.selection.length"
     >
       <div class="multi-menu">
-        <span style="font-size: 12px">已选中{{ state.selection.length }}项</span>
+        <span style="font-size: 12px"
+          >已选中{{ state.selection.length }}项</span
+        >
         <el-divider direction="vertical" />
         <slot name="multiSelectMenu" :selection="state.selection" />
       </div>
@@ -55,14 +57,22 @@
           :key="column.prop"
           :column="column"
         ></multistage-column>
-        <el-table-column v-else :key="column.id" v-bind="column" show-overflow-tooltip>
+        <el-table-column
+          v-else
+          :key="column.id"
+          v-bind="column"
+          show-overflow-tooltip
+        >
           <template v-if="column.slotName" v-slot="scope">
             <slot :name="column.slotName" :scope="scope"></slot>
           </template>
         </el-table-column>
       </template>
       <!-- 操作栏 -->
-      <el-table-column v-if="_tableConfig.showHandler" v-bind="_tableConfig.handlerConfig">
+      <el-table-column
+        v-if="_tableConfig.showHandler"
+        v-bind="_tableConfig.handlerConfig"
+      >
         <template v-slot="scope">
           <slot name="handler" :scope="scope"></slot>
         </template>
@@ -88,10 +98,15 @@
     </div>
   </div>
 </template>
+<script lang="ts">
+export default {
+  name: "vue3-xmw-table", //这个⾮常重要，就是未来你放到其他项⽬中，组件标签的名字，⽐如：<my-first-comp></my-first-comp>
+};
+</script>
 <script lang="ts" setup>
 import { defineProps, computed, defineEmits, reactive, ref } from "vue";
 import MultistageColumn from "./MultistageColumn.vue"; // 递归多级表头组件
-import Pagination from './Pagination.vue' // 分页组件
+import Pagination from "./Pagination.vue"; // 分页组件
 // 定义组件接收的prop属性
 const prop = defineProps({
   // 表格源数据
@@ -102,7 +117,7 @@ const prop = defineProps({
   //   表格配置项
   tableConfig: {
     type: Object,
-    default: () => { },
+    default: () => {},
   },
   //   表格列配置
   columns: {
@@ -122,7 +137,7 @@ const prop = defineProps({
   // 分页配置
   paginationConfig: {
     type: Object,
-    default: () => { },
+    default: () => {},
   },
 });
 const emit = defineEmits([
@@ -146,12 +161,12 @@ const _tableConfig = computed(() => {
     rowKey: "id", //   行数据的 Key，用来优化 Table 的渲染
     showSeletion: false, // 是否多选
     showIndexColumn: false, // 是否显示自定义索引
-    indexLabel: '序号', // 自定义索引名
+    indexLabel: "序号", // 自定义索引名
     isCheckMemory: false, // 是否需要跨页勾选
     showHandler: false, // 是否需要显示操作栏
     showExpand: false, // 是否是展开行
     showAppend: false, // 插入至表格最后一行之后的内容， 如果需要对表格的内容进行无限滚动操作，可能需要用到这个 slot。 若表格有合计行，该 slot 会位于合计行之上
-    appendLabel: '自定义', // 自定义默认内容
+    appendLabel: "自定义", // 自定义默认内容
   };
   result = Object.assign(config, prop.tableConfig);
   result.handlerConfig = _tableConfig;
@@ -259,8 +274,8 @@ defineExpose({
   clearSort,
   clearFilter,
   doLayout,
-  sort
-})
+  sort,
+});
 </script>
 <style scoped>
 .pagination {
