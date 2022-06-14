@@ -1,11 +1,54 @@
 基于 `Vue3` + `Element-plus` 封装的 `Table` 组件，欢迎大家交流学习，持续开发中
-### 预览地址：https://cyan-xmw.github.io/vue3-element-table/dist/
-### 参考文章：https://juejin.cn/post/7016921470731288584
+### 预览地址：[vue3-xmw-table](https://ele-plus-table.xmwpro.com/)
 
 # Vue3-element-table
 
 基于 `Vue3` + `Element-plus` 封装的 `table` 组件，支持所有 `elementUI table` 组件配置项 [文档](https://element-plus.gitee.io/zh-CN/component/table.html)，另外多选功能做了跨分页多选
 
+### 使用方法
+* 根目录下执行 `npm i vue3-xmw-table` 命令
+```POWERSHELL
+npm i vue3-xmw-table
+```
+
+* 全局挂载组件
+```JAVASCRIPT
+import { createApp } from 'vue'
+import App from './App.vue'
+import Xmwtable from 'vue3-xmw-table'
+
+createApp(App).use(Xmwtable).mount('#app')
+
+```
+
+* 在页面上使用
+```HTML
+<!-- template -->
+<vue3-xmw-table
+    stripe
+    border
+    show-summary
+    :summary-method="getSummaries"
+    :tableData="state.tableData"
+    :loading="state.loading"
+    :columns="state.tableColumns"
+    :tableConfig="tableConfig"
+    :showPagination="false"
+  >
+    <template v-slot:handler="{ scope }">
+      <el-button
+        size="small"
+        type="primary"
+        >编辑</el-button
+      >
+      <el-button
+        type="danger"
+        size="small"
+        >删除</el-button
+      >
+    </template>
+  </vue3-xmw-table>
+```
 ### Table 属性
 
 除此之外支持所有 `el-table` 属性

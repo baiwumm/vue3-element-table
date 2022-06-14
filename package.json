@@ -1,6 +1,6 @@
 {
   "name": "vue3-xmw-table",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/vue3-xmw-table.umd.js",
   "module": "dist/vue3-xmw-table.es.js",
   "private": false,
