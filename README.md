@@ -1,7 +1,7 @@
 基于 `Vue3` + `Element-plus` 封装的 `Table` 组件，欢迎大家交流学习，持续开发中
 ### 预览地址：[vue3-xmw-table](https://ele-plus-table.xmwpro.com/)
 
-# Vue3-element-table
+# Vue3-xmw-table
 
 基于 `Vue3` + `Element-plus` 封装的 `table` 组件，支持所有 `elementUI table` 组件配置项 [文档](https://element-plus.gitee.io/zh-CN/component/table.html)，另外多选功能做了跨分页多选
 
@@ -35,19 +35,19 @@ createApp(App).use(Xmwtable).mount('#app')
     :tableConfig="tableConfig"
     :showPagination="false"
   >
-    <template v-slot:handler="{ scope }">
-      <el-button
-        size="small"
-        type="primary"
-        >编辑</el-button
-      >
-      <el-button
-        type="danger"
-        size="small"
-        >删除</el-button
-      >
-    </template>
-  </vue3-xmw-table>
+  <template v-slot:handler="{ scope }">
+    <el-button
+      size="small"
+      type="primary"
+      >编辑</el-button
+    >
+    <el-button
+      type="danger"
+      size="small"
+      >删除</el-button
+    >
+  </template>
+</vue3-xmw-table>
 ```
 ### Table 属性
 
