@@ -1,5 +1,5 @@
 基于 `Vue3` + `Element-plus` 封装的 `Table` 组件，欢迎大家交流学习，持续开发中
-### 预览地址：[vue3-xmw-table](https://ele-plus-table.xmwpro.com/)
+### 预览地址：[vue3-xmw-table](https://ele-plus-table.baiwumm.com/)
 
 # Vue3-xmw-table
 
